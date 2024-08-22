@@ -1,0 +1,24 @@
+{
+  "name": "bus-time",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bus",
+    "time",
+    "server",
+    "node",
+    "express"
+  ],
+  "author": "Pavel I-S",
+  "license": "ISC",
+  "description": "Расписание автобусов онлайн",
+  "dependencies": {
+    "express": "^4.19.2",
+    "luxon": "^3.5.0"
+  }
+}

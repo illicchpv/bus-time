@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "busNumber": "100",
+    "startPoint": "г. Калининград",
+    "endPoint": "г. Гурьевск",
+    "firstDepartureTime": "04:38",
+    "frequencyMinutes": 16
+  },
+  {
+    "id": 2,
+    "busNumber": "101",
+    "startPoint": "г. Калининград",
+    "endPoint": "пос. Ярославское",
+    "firstDepartureTime": "05:17",
+    "frequencyMinutes": 25
+  }
+]
