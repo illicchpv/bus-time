@@ -37,3 +37,19 @@ extension://aejoelaoggembcahagimdiliamlcdmfm/index.html#requests
 https://www.npmjs.com/package/nodemon  
   nodemon
   >npm i nodemon -D
+
+---
+День 2 Frontend
+https://my.methed.ru/pl/teach/control/lesson/view?id=333804673&editMode=0
+
+Полезные ссылки  
+ [Git скачать](https://git-scm.com/)  
+ [tBootstrapext](https://getbootstrap.com/)  
+
+Обязательное задание:  
+Повторить то, что было в видео  
+
+Корректная обработка окончаний строк:  
+git config --global core.autocrlf true  
+git config --global core.safecrlf warn  
+
