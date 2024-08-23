@@ -44,7 +44,7 @@ https://my.methed.ru/pl/teach/control/lesson/view?id=333804673&editMode=0
 
 Полезные ссылки  
  [Git скачать](https://git-scm.com/)  
- [tBootstrapext](https://getbootstrap.com/)  
+ [Bootstrap](https://getbootstrap.com/)  
 
 Обязательное задание:  
 Повторить то, что было в видео  
