@@ -107,6 +107,7 @@ app.get("/next-departure", async (req, res) => {
     res.json(updatedBuses);
   } catch (e) {
     console.error(e);
+    res.status(500);
     res.send("Error: " + e);
   }
 });

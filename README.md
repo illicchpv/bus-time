@@ -30,3 +30,10 @@ API tester:
 extension://aejoelaoggembcahagimdiliamlcdmfm/index.html#requests
 
 [server github](https://github.com/illicchpv/bus-time)
+
+---
+трансляция
+
+https://www.npmjs.com/package/nodemon  
+  nodemon
+  >npm i nodemon -D
