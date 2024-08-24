@@ -53,3 +53,17 @@ https://my.methed.ru/pl/teach/control/lesson/view?id=333804673&editMode=0
 git config --global core.autocrlf true  
 git config --global core.safecrlf warn  
 
+---
+День 3 WebSocket
+https://my.methed.ru/pl/teach/control/lesson/view?id=333804675&editMode=0
+
+https://www.npmjs.com/package/ws
+>npm i ws
+
+Полезные ссылки  
+https://git-scm.com/ - скачать git  
+
+https://github.com/ - регистрируемся  
+
+Обязательное задание:  
+Повторить то, что было в видео

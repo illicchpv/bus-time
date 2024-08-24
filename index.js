@@ -3,6 +3,7 @@ import {readFile} from "node:fs/promises";
 import path from "node:path";
 import url from "node:url";
 import {DateTime} from "luxon";
+import { WebSocketServer } from "ws";
 
 const __filename = url.fileURLToPath(import.meta.url); // путь к текущему модулю (index.js)
 const __dirname = path.dirname(__filename); // путь к каталогу, в котором находится текущий модуль
@@ -134,5 +135,3 @@ function sortBuses(buses) {
 app.listen(port, () => {
   console.log(`Server started on port ${port} http://localhost:${port}`);
 });
-
-console.log("Hello, World!");
