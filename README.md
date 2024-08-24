@@ -1,6 +1,8 @@
 server:  
 [server github](https://github.com/illicchpv/bus-time)
 
+    опубликованный результат:
+    https://bus-time-xve7.onrender.com
 
 ---
 День 1 backend
@@ -70,6 +72,7 @@ https://github.com/twbs/icons/releases/tag/v1.11.3
 https://render.com/  
   login - GitHub  
     https://github.com/illicchpv/bus-time
+    опубликованный результат:
     https://bus-time-xve7.onrender.com
 
 
