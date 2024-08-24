@@ -132,6 +132,44 @@ function sortBuses(buses) {
     - new Date(b.nextDeparture.date + 'T' + b.nextDeparture.time + 'Z'));
 };
 
-app.listen(port, () => {
+const wss = new WebSocketServer({ noServer: true });
+const clients = new Set();
+wss.on("connection", function connection(ws) {
+  console.log('WebSocket connection');
+  clients.add(ws);
+
+  const sendUpdates = async () => {
+    try{
+      const updatedBuses = await sendUpdatedData();
+      const sortedBuses = sortBuses(updatedBuses);
+
+      ws.send(JSON.stringify(sortedBuses));
+    } catch (e) {
+      console.error('sendUpdates Error:', e);
+    }
+  };
+
+  const interval = setInterval(() => {
+    sendUpdates();
+  }, 5000);
+
+  ws.on("close", function close() {
+    clearInterval(interval);
+    clients.delete(ws);
+    console.log('ws closed');
+  });
+
+  // ws.on("message", function incoming(message) {
+  //   console.log("received: %s", message);
+  // });
+
+});
+
+const server =app.listen(port, () => {
   console.log(`Server started on port ${port} http://localhost:${port}`);
 });
+server.on("upgrade", (req, socket, head) => {
+  wss.handleUpgrade(req, socket, head, (ws) => {
+    wss.emit("connection", ws, req);
+  })
+})
