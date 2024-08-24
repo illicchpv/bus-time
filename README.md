@@ -80,3 +80,8 @@ https://github.com/ - регистрируемся
 
 Обязательное задание:  
 Повторить то, что было в видео
+
+---
+[Deploy Node JS application on IIS](https://medium.com/@adarsh-d/deploy-node-js-application-on-iis-9703d5dfcaca)
+
+[How to deploy a Node.js application on IIS Windows Server](https://www.advancedinstaller.com/user-guide/qa-nodejs-app-windows-deployment.html)

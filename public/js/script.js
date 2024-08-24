@@ -1,4 +1,5 @@
 // script.js
+console.log('isLocal: ', isLocal);
 
 const fetchBusData = async () => {
   try {
@@ -53,14 +54,14 @@ const renderBusData = async (buses) => {
 };
 
 const initWebSocket = () => {
-  const ws = new WebSocket(`wss://${window.location.host}`);
+  const ws = new WebSocket(`${isLocal ? 'ws:' : 'wss:'}//${window.location.host}`);
   ws.addEventListener('open', () => {
     console.log('ws connection open');
   });
 
   ws.addEventListener('message', (event) => {
     const buses = JSON.parse(event.data);
-    console.log('ws connection message:', buses);
+    // console.log('ws connection message:', buses);
     renderBusData(buses);
   });
 

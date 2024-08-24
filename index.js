@@ -3,7 +3,7 @@ import {readFile} from "node:fs/promises";
 import path from "node:path";
 import url from "node:url";
 import {DateTime, Duration} from "luxon";
-import { WebSocketServer } from "ws";
+import {WebSocketServer} from "ws";
 
 const __filename = url.fileURLToPath(import.meta.url); // путь к текущему модулю (index.js)
 const __dirname = path.dirname(__filename); // путь к каталогу, в котором находится текущий модуль
@@ -20,49 +20,27 @@ const loadBuses = async () => {
   // console.log('data: ', data);
   return JSON.parse(data);
 };
-// loadBuses();
 
 const getNextDeparture = (firstDepartureTime, frequencyMinutes) => {
   const now = DateTime.now().setZone(timeZone);
   const [hours, minutes] = firstDepartureTime.split(':').map(n => Number(n));
 
-  let departure = DateTime.now().set({
-    hour: hours,
-    minute: minutes,
-    second: 0,
-    millisecond: 0,
-  }).setZone(timeZone);
-  // console.log('departure: ', departure);
+  let departure = DateTime.now()
+    .set({hour: hours, minute: minutes, second: 0, millisecond: 0})
+    .setZone(timeZone);
 
-  if (now > departure) {
-    departure = departure.plus({minutes: frequencyMinutes});
-  }
-  const endOfDay = DateTime.now().set({
-    hour: 23,
-    minute: 59,
-    second: 59,
-    millisecond: 0,
-  }).setZone(timeZone);
-
-  if (departure > endOfDay) {
-    departure = departure.startOf('day').plus({days: 1}).set({
-      hour: hours,
-      minute: minutes,
-      second: 0,
-      millisecond: 0,
-    }).setZone(timeZone);;
-  }
+  const endOfDay = DateTime.now()
+    .set({hour: 23, minute: 59, second: 59, millisecond: 0})
+    .setZone(timeZone);
 
   while (now > departure) {
     departure = departure.plus({minutes: frequencyMinutes});
 
     if (departure > endOfDay) {
-      departure = departure.startOf('day').plus({days: 1}).set({
-        hour: hours,
-        minute: minutes,
-        second: 0,
-        millisecond: 0,
-      }).setZone(timeZone);;
+      departure = DateTime.now()
+        .set({hour: hours, minute: minutes, second: 0, millisecond: 0})
+        .plus({days: 1})
+        .setZone(timeZone);
     }
   }
 
@@ -137,14 +115,14 @@ function sortBuses(buses) {
     - new Date(b.nextDeparture.date + 'T' + b.nextDeparture.time + 'Z'));
 };
 
-const wss = new WebSocketServer({ noServer: true });
+const wss = new WebSocketServer({noServer: true});
 const clients = new Set();
 wss.on("connection", function connection(ws) {
   console.log('WebSocket connection');
   clients.add(ws);
 
   const sendUpdates = async () => {
-    try{
+    try {
       const updatedBuses = await sendUpdatedData();
       const sortedBuses = sortBuses(updatedBuses);
 
@@ -170,11 +148,11 @@ wss.on("connection", function connection(ws) {
 
 });
 
-const server =app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started on port ${port} http://localhost:${port}`);
 });
 server.on("upgrade", (req, socket, head) => {
   wss.handleUpgrade(req, socket, head, (ws) => {
     wss.emit("connection", ws, req);
-  })
-})
+  });
+});
