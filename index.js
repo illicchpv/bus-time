@@ -2,7 +2,7 @@ import express from "express";
 import {readFile} from "node:fs/promises";
 import path from "node:path";
 import url from "node:url";
-import {DateTime} from "luxon";
+import {DateTime, Duration} from "luxon";
 import { WebSocketServer } from "ws";
 
 const __filename = url.fileURLToPath(import.meta.url); // путь к текущему модулю (index.js)
@@ -71,10 +71,13 @@ const getNextDeparture = (firstDepartureTime, frequencyMinutes) => {
 
 const sendUpdatedData = async () => {
   const buses = await loadBuses();
+  const now = DateTime.now().setZone(timeZone);
 
   const updatedBuses = buses.map(bus => {
     const nextDeparture = getNextDeparture(bus.firstDepartureTime, bus.frequencyMinutes);
     // console.log('nextDeparture: ', nextDeparture);
+
+    const timeRemain = Duration.fromMillis(nextDeparture.diff(now).toMillis());
 
     return {
       nextDeparture: {
@@ -82,6 +85,8 @@ const sendUpdatedData = async () => {
         time: nextDeparture.toFormat('HH:mm'),
       },
       ...bus,
+      // remain: nextDeparture.diffNow('seconds').seconds.toFixed(0),
+      remain: timeRemain.toFormat('hh:mm:ss'),
     };
   });
   // console.log('updatedBuses: ', updatedBuses);

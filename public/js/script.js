@@ -25,6 +25,7 @@ const renderBusData = async (buses) => {
     <td>${startPoint} - ${endPoint}</td>\
     <td>${nextDepartureDateLocal}</td>\
     <td>${nextDepartureTimeLocal}</td>\
+    <td>${remain < '00:05:00' ? '<i>отправляется</i>' : remain}</td>\
   </tr>\
   ".trim();
   buses.forEach(el => {
@@ -34,8 +35,7 @@ const renderBusData = async (buses) => {
     const nextDepartureDateTimeLocal = nextDepartureDateTimeUTC.toLocaleString();
     let trClass = '';
     // debugger
-    if (now < nextDepartureDateTimeUTC) 
-    {
+    if (now < nextDepartureDateTimeUTC) {
       trClass = 'active';
     } else {
       trClass = 'disabled';
@@ -52,6 +52,28 @@ const renderBusData = async (buses) => {
 
 };
 
+const initWebSocket = () => {
+  const ws = new WebSocket(`ws://${window.location.host}`);
+  ws.addEventListener('open', () => {
+    console.log('ws connection open');
+  });
+
+  ws.addEventListener('message', (event) => {
+    const buses = JSON.parse(event.data);
+    console.log('ws connection message:', buses);
+    renderBusData(buses);
+  });
+
+  ws.addEventListener('error', (err) => {
+    console.log('ws connection error:', err);
+  });
+
+  ws.addEventListener('close', () => {
+    console.log('ws connection close');
+  });
+
+};
+
 const init = async () => {
   const buses = await fetchBusData();
   console.log('init buses: ', buses);
@@ -60,8 +82,10 @@ const init = async () => {
   setInterval(() => {
     const timeStr = new Date().toLocaleTimeString();
     document.querySelector('.time').innerHTML = timeStr;
-    renderBusData(buses);
+    // renderBusData(buses);
   }, 1000);
+
+  initWebSocket();
 };
 
 init();
