@@ -79,13 +79,25 @@ const init = async () => {
   console.log('init buses: ', buses);
 
   renderBusData(buses);
-  setInterval(() => {
-    const timeStr = new Date().toLocaleTimeString();
-    document.querySelector('.time').innerHTML = timeStr;
-    // renderBusData(buses);
-  }, 1000);
+
+  // setInterval(() => {
+  //   const timeStr = new Date().toLocaleTimeString();
+  //   document.querySelector('.time').innerHTML = timeStr;
+  //   document.getElementById('current-time').innerHTML = timeStr;
+  //   // renderBusData(buses);
+  // }, 1000);
 
   initWebSocket();
+
+  updateTime();
 };
 
 init();
+
+
+function updateTime() {
+  const timeStr = new Date().toLocaleTimeString();
+  document.getElementById('current-time').innerHTML = timeStr;
+
+  setTimeout(updateTime, 1000);
+}

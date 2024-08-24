@@ -60,6 +60,13 @@ https://my.methed.ru/pl/teach/control/lesson/view?id=333804675&editMode=0
 https://www.npmjs.com/package/ws
 >npm i ws
 
+https://getbootstrap.com/
+https://icons.getbootstrap.com/
+https://icons.getbootstrap.com/#install
+https://github.com/twbs/icons/releases/tag/v1.11.3
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
 Полезные ссылки  
 https://git-scm.com/ - скачать git  
 
